@@ -10,22 +10,22 @@ int main(int argc, char *argv[]) {
       alcGetString(NULL, ALC_DEFAULT_DEVICE_SPECIFIER);
   if (defaultDeviceName == NULL) {
     fprintf(stderr, "Cannot find OpenAL default device.\n");
-    exit(1);
+    exit(0);
   }
   ALCdevice *defaultDevice = alcOpenDevice(defaultDeviceName);
   if (defaultDevice == NULL) {
     fprintf(stderr, "Cannot initialize OpenAL default device '%s'",
             defaultDeviceName);
-    exit(1);
+    exit(0);
   }
   ALCcontext *context = alcCreateContext(defaultDevice, NULL);
   if (context == NULL) {
     fprintf(stderr, "Cannot create OpenAL context\n");
-    exit(1);
+    exit(0);
   }
   if (alcMakeContextCurrent(context) == ALC_FALSE) {
     fprintf(stderr, "Cannot make OpenAL current context\n");
-    exit(1);
+    exit(0);
   }
   printf("OpenAL initialization successful\n");
   return 0;
