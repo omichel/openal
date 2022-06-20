@@ -1,2 +1,3 @@
-# openal
-Testing openal in the CI
+# OpenAL
+
+Testing OpenAL in the CI on Windows
