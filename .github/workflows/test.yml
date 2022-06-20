@@ -1,4 +1,4 @@
-name: Testing OpenAL
+name: Testing OpenAL on Windows
 
 on:
   pull_request:
