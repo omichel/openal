@@ -1,4 +1,4 @@
-name: Testing OpenAL
+name: Testing OpenAL on Windows
 
 on:
   pull_request:
@@ -10,7 +10,6 @@ defaults:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'push' }}
     strategy:
       matrix:
         os: [windows-2019]
@@ -19,15 +18,13 @@ jobs:
     - uses: msys2/setup-msys2@v2
       with:
         update: false
-        install: >-
-          git
-          openssh
     - uses: actions/checkout@v3
-      with:
-         fetch-depth: 15
+    - name: Install gcc
+      run: |
+        pacman -S --noconfirm mingw-w64-x86_64-gcc
     - name: Install OpenAL
       run: |
-        pacman -S mingw-w64-x86_64-openal
+        pacman -S --noconfirm mingw-w64-x86_64-openal
     - name: Compile
       run: |
         gcc -Wall openal.c -o oal -lopenal
