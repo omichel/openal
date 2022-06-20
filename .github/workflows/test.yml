@@ -1,0 +1,36 @@
+name: Testing OpenAL
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened, labeled, unlabeled]
+
+defaults:
+  run:
+    shell: msys2 {0}
+
+jobs:
+  build:
+    if: ${{ github.event_name == 'push' }}
+    strategy:
+      matrix:
+        os: [windows-2019]
+    runs-on: ${{ matrix.os }}
+    steps:
+    - uses: msys2/setup-msys2@v2
+      with:
+        update: false
+        install: >-
+          git
+          openssh
+    - uses: actions/checkout@v3
+      with:
+         fetch-depth: 15
+    - name: Install OpenAL
+      run: |
+        pacman -S mingw-w64-x86_64-openal
+    - name: Compile
+      run: |
+        gcc -Wall openal.c -o oal -lopenal
+    - name: Run
+      run: |
+        ./oal.exe
