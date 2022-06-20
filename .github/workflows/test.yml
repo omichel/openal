@@ -25,7 +25,7 @@ jobs:
          fetch-depth: 15
     - name: Install OpenAL
       run: |
-        pacman -S mingw-w64-x86_64-openal
+        pacman -S --noconfirm mingw-w64-x86_64-openal
     - name: Compile
       run: |
         gcc -Wall openal.c -o oal -lopenal
