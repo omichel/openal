@@ -10,7 +10,6 @@ defaults:
 
 jobs:
   build:
-    if: ${{ github.event_name == 'push' }}
     strategy:
       matrix:
         os: [windows-2019]
